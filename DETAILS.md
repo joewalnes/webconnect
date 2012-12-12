@@ -209,16 +209,16 @@ project can help get the momentum and interest necessary.
 So, how will WebConnect do it?
 ------------------------------
 
-   * Phase 1 [DONE]: Use chrome.serial. This is the simplest but not that practical.
-     as it's limited to Chrome packaged apps. Enough to get a proof-of-concept though.
-   * Phase 2: Use FireBreath to create a native NPAPI plugin for hardware access, and
-     wrap it up in a Chrome extension that provides UI integration for managing which
-     pages/domains may access the serial port. Supports Chrome on Windows, OS-X and Linux.
-   * Phase 3: Create a FireFox extension version of the Chrome extension in phase 2.
-     This will re-use the NPAPI plugin. Supports FireFox on Windows, OS-X and Linux.
-   * Phase 4: Evaluate benefit of targetting other browses (IE and Safari), and repeat.
-   * Phase 5: Evangalize and work on web-standards to attempt to make this an official
-     API supported by browsers.
+*   Phase 1 [DONE]: Use chrome.serial. This is the simplest but not that practical.
+    as it's limited to Chrome packaged apps. Enough to get a proof-of-concept though.
+*   Phase 2: Use FireBreath to create a native NPAPI plugin for hardware access, and
+    wrap it up in a Chrome extension that provides UI integration for managing which
+    pages/domains may access the serial port. Supports Chrome on Windows, OS-X and Linux.
+*   Phase 3: Create a FireFox extension version of the Chrome extension in phase 2.
+    This will re-use the NPAPI plugin. Supports FireFox on Windows, OS-X and Linux.
+*   Phase 4: Evaluate benefit of targetting other browses (IE and Safari), and repeat.
+*   Phase 5: Evangalize and work on web-standards to attempt to make this an official
+    API supported by browsers.
 
 
 
