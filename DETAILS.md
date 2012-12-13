@@ -154,8 +154,8 @@ requires an extra installation step.
 
 In addition, client side Java Applets have a slow startup time (due to the
 cost of initiating a JVM), and causes the page to become unresponsive at
-startup. Not an ideal user experience (though there may be ways around this
-- for example by loading it in a background page in a Chrome extension).
+startup. Not an ideal user experience (though there may be ways around this...
+for example by loading it in a background page in a Chrome extension).
 
 Summary: Signed Applets may work, but JVM still needs to be installed, and
 the overhead is not ideal.
