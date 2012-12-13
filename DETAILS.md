@@ -113,7 +113,7 @@ Microsoft's plugin mechanism for Internet Explorer. Similar capabilities
 to NPAPI.
 
 Will work in most versions of Internet Explorer on standard PCs. Will [not
-work in IE10 in Metro mode](http://msdn.microsoft.com/en-us/library/ie/hh968248(v=vs.85).aspx).
+work in IE10 in Metro mode](http://msdn.microsoft.com/en-us/library/ie/hh968248.aspx).
 
 Summary: Will give IE users the access they need.
 
