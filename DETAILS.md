@@ -8,7 +8,7 @@ A survey of the landscape
 
 These were the options considered to allow JavaScript access to hardware.
 
-=== Packaged Apps Hardware APIs (Chrome) ===
+### Packaged Apps Hardware APIs (Chrome)
 
 As of recent Chrome builds there now exists the 
 [chrome.serial](http://developer.chrome.com/trunk/apps/serial.html) and
@@ -29,7 +29,7 @@ Summary: Chrome hardware APIs are available to packaged apps, but not
 standard web-apps or browser extensions.
 
 
-=== Native Client and Untrusted PPAPI (Chrome) ===
+### Native Client and Untrusted PPAPI (Chrome)
 
 Recent builds of Chrome now have [Native Client](https://developers.google.com/native-client/)
 (NaCL) available. This allows C
@@ -50,7 +50,7 @@ do this (which it currently does not).
 Summary: Native Client does not help.
 
 
-=== Trusted PPAPI (Chrome) ===
+### Trusted PPAPI (Chrome)
 
 Chrome also has an extension mechanism based on the same PPAPI interfaces
 for [trusted plugins](http://www.chromium.org/nativeclient/getting-started/getting-started-background-and-basics#TOC-Trusted-vs-Untrusted).
@@ -77,7 +77,7 @@ Summary: Trusted plugins do help, but they are hard to build and even harder
 to distribute. Tools would be required to help users install these.
 
 
-=== NPAPI (FireFox, Opera, Safari, and sorta Chrome) ===
+### NPAPI (FireFox, Opera, Safari, Chrome)
 
 [NPAPI](http://en.wikipedia.org/wiki/NPAPI) (Netscape Plugin API) 
 is the age-old interface to writing plugins
@@ -106,19 +106,19 @@ Opera and Safari. Also works in Chrome for the moment, but this may
 change one day.
 
 
-=== Active-X (Internet Explorer) ===
+### Active-X (Internet Explorer)
 
 [Active-X](http://en.wikipedia.org/wiki/ActiveX) is
 Microsoft's plugin mechanism for Internet Explorer. Similar capabilities
 to NPAPI.
 
 Will work in most versions of Internet Explorer on standard PCs. Will [not
-work in IE10 in Metro mode](http://msdn.microsoft.com/en-us/library/ie/hh968248(v=vs.85).aspx).
+work in IE10 in Metro mode](http://msdn.microsoft.com/en-us/library/ie/hh968248.aspx).
 
 Summary: Will give IE users the access they need.
 
 
-=== Firebreath ===
+### Firebreath
 
 [Firebreath](http://firebreath.org) is an open source project that simplifies native plugin
 development on top of NPAPI and Active-X. It is relatively painless
@@ -137,7 +137,7 @@ on the major platforms. That is, so long as Chrome continue to support
 NPAPI.
 
 
-=== Signed Java Applets ===
+### Signed Java Applets
 
 [Signed Java Applets](http://en.wikipedia.org/wiki/Java_applet#Signed)
 can be embedded in web-pages that run with elevated priviliges.
@@ -154,19 +154,19 @@ requires an extra installation step.
 
 In addition, client side Java Applets have a slow startup time (due to the
 cost of initiating a JVM), and causes the page to become unresponsive at
-startup. Not an ideal user experience (though there may be ways around this
-- for example by loading it in a background page in a Chrome extension).
+startup. Not an ideal user experience (though there may be ways around this...
+for example by loading it in a background page in a Chrome extension).
 
 Summary: Signed Applets may work, but JVM still needs to be installed, and
 the overhead is not ideal.
 
 
-=== Flash ===
+### Flash
 
 Flash provides no mechanism for integrating with custom hardware.
 
 
-=== Installable Service ===
+### Installable Service
 
 Another approach would be to install a small standalone service that runs 
 on the user's computer (outside of the web-browser), that proxies the
@@ -186,7 +186,7 @@ Summary: This is a great fallback plan, to cover all the browsers and
 platforms that another solution cannot be found for.
 
 
-=== Custom Browser ===
+### Custom Browser
 
 If the browser itself is open source (Chrome, Firefox), it's also possible
 to fork the browser, integrate the APIs and create a custom build.
@@ -195,7 +195,7 @@ Not ideal though as no-one wants to download a specialized browser, and
 the overhead of keeping it up to date will be high.
 
 
-=== Open Standards ===
+### Open Standards
 
 The ultimate goal will be if we could create a web-standard that was adopted
 by browser vendors. There are already many
