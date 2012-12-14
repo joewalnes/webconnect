@@ -20,6 +20,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 void WCSerial::StaticInitialize()
 {
+    FBLOG_INFO("StaticInitialize", "Static Initialize");
     // Place one-time initialization stuff here; As of FireBreath 1.4 this should only
     // be called once per process
 }
@@ -33,6 +34,7 @@ void WCSerial::StaticInitialize()
 ///////////////////////////////////////////////////////////////////////////////
 void WCSerial::StaticDeinitialize()
 {
+    FBLOG_INFO("StaticDeinitialize", "Static Deinitialize");
     // Place one-time deinitialization stuff here. As of FireBreath 1.4 this should
     // always be called just before the plugin library is unloaded
 }
@@ -44,6 +46,7 @@ void WCSerial::StaticDeinitialize()
 ///////////////////////////////////////////////////////////////////////////////
 WCSerial::WCSerial()
 {
+    FBLOG_INFO("WCSerial", "Constructor");
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -51,6 +54,7 @@ WCSerial::WCSerial()
 ///////////////////////////////////////////////////////////////////////////////
 WCSerial::~WCSerial()
 {
+    FBLOG_INFO("~WCSerial", "Destructor");
     // This is optional, but if you reset m_api (the shared_ptr to your JSAPI
     // root object) and tell the host to free the retained JSAPI objects then
     // unless you are holding another shared_ptr reference to your JSAPI object
@@ -61,6 +65,7 @@ WCSerial::~WCSerial()
 
 void WCSerial::onPluginReady()
 {
+    FBLOG_INFO("onPluginReady", "onPluginReady");
     // When this is called, the BrowserHost is attached, the JSAPI object is
     // created, and we are ready to interact with the page and such.  The
     // PluginWindow may or may not have already fire the AttachedEvent at
@@ -69,6 +74,7 @@ void WCSerial::onPluginReady()
 
 void WCSerial::shutdown()
 {
+    FBLOG_INFO("shutdown", "shutdown");
     // This will be called when it is time for the plugin to shut down;
     // any threads or anything else that may hold a shared_ptr to this
     // object should be released here so that this object can be safely
@@ -89,6 +95,7 @@ void WCSerial::shutdown()
 ///////////////////////////////////////////////////////////////////////////////
 FB::JSAPIPtr WCSerial::createJSAPI()
 {
+    FBLOG_INFO("createJSAPI", "createJSAPI");
     // m_host is the BrowserHost
     return boost::make_shared<WCSerialAPI>(FB::ptr_cast<WCSerial>(shared_from_this()), m_host);
 }

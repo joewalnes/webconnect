@@ -31,8 +31,9 @@ public:
     WCSerialAPI(const WCSerialPtr& plugin, const FB::BrowserHostPtr& host) :
         m_plugin(plugin), m_host(host)
     {
+        FBLOG_INFO("WCSerialAPI()", "constructor");
         registerMethod("echo",      make_method(this, &WCSerialAPI::echo));
-        registerMethod("testEvent", make_method(this, &WCSerialAPI::testEvent));
+    /*    registerMethod("testEvent", make_method(this, &WCSerialAPI::testEvent));
         
         // Read-write property
         registerProperty("testString",
@@ -44,6 +45,7 @@ public:
         registerProperty("version",
                          make_property(this,
                                        &WCSerialAPI::get_version));
+*/
     }
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -53,32 +55,34 @@ public:
     ///         the browser is done with it; this will almost definitely be after
     ///         the plugin is released.
     ///////////////////////////////////////////////////////////////////////////////
-    virtual ~WCSerialAPI() {};
+    virtual ~WCSerialAPI() {
+        FBLOG_INFO("~WCSerialAPI()", "destructor");
+    };
 
     WCSerialPtr getPlugin();
-
+/*
     // Read/Write property ${PROPERTY.ident}
     std::string get_testString();
     void set_testString(const std::string& val);
 
     // Read-only property ${PROPERTY.ident}
     std::string get_version();
-
+*/
     // Method echo
     FB::variant echo(const FB::variant& msg);
-    
+  /*  
     // Event helpers
     FB_JSAPI_EVENT(test, 0, ());
     FB_JSAPI_EVENT(echo, 2, (const FB::variant&, const int));
 
     // Method test-event
     void testEvent();
-
+*/
 private:
     WCSerialWeakPtr m_plugin;
     FB::BrowserHostPtr m_host;
 
-    std::string m_testString;
+  //  std::string m_testString;
 };
 
 #endif // H_WCSerialAPI

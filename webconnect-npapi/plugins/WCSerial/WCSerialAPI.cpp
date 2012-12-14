@@ -19,8 +19,8 @@
 ///////////////////////////////////////////////////////////////////////////////
 FB::variant WCSerialAPI::echo(const FB::variant& msg)
 {
-    static int n(0);
-    fire_echo("So far, you clicked this many times: ", n++);
+    //static int n(0);
+    //fire_echo("So far, you clicked this many times: ", n++);
 
     // return "foobar";
     return msg;
@@ -42,7 +42,7 @@ WCSerialPtr WCSerialAPI::getPlugin()
     }
     return plugin;
 }
-
+/*
 // Read/Write property testString
 std::string WCSerialAPI::get_testString()
 {
@@ -64,3 +64,4 @@ void WCSerialAPI::testEvent()
 {
     fire_test();
 }
+*/
