@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+
+<button id="test">Test</button>
+
+<p>Checks that this web-page can communicate with the native SerialPort driver.</p>
+
+<script src="../webconnect.js"></script>
+<script>
+    document.getElementById('test').onclick = function() {
+	SerialPort.test('hello', function(result) {
+	    alert('Response from SerialPort.test():\n\n' + result);
+	});
+    };
+</script>
