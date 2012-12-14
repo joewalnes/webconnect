@@ -15,7 +15,11 @@ var pageMessageHandlers = {
    'test': function(args, callback) {
        var result = serialPlugin.echo(args.text);
        callback({text:result});
-   }
+   },
+   'availablePorts': function(args, callback) {
+       var result = serialPlugin.availablePorts();
+       callback({portNames:result});
+   },
 };
 
 // Wire-up inbound messages from web-page to pageMessageHandlers (above).

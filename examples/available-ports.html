@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+
+<p>Available serial ports: (refreshes every second)</p>
+<div id="result"></div>
+
+<script src="../webconnect.js"></script>
+<script>
+    var result = document.getElementById('result');
+    setInterval(function() {
+        SerialPort.availablePorts(function(portNames) {
+            if (portNames.length) {
+                result.innerText = portNames.join('\n');
+            } else {
+                result.innerText = 'No ports found';
+            } 
+        });
+    }, 1000);
+</script>
