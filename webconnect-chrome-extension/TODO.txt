@@ -1,0 +1,2 @@
+- Allow users to authorize/deny access to serial port
+- Include plugin binary

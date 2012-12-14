@@ -12,9 +12,9 @@ var serialPlugin = document.getElementById('serialPlugin');
 
 // Handle messages from page.
 var pageMessageHandlers = {
-   'test': function(args, msg, port) {
+   'test': function(args, callback) {
        var result = serialPlugin.echo(args.text);
-       respond(port, msg.id, {text:result});
+       callback({text:result});
    }
 };
 
