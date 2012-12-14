@@ -1,3 +1,0 @@
-*.pyc
-nacl_sdk/pepper_*
-nacl_sdk/sdk_cache
