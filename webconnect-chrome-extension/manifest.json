@@ -4,6 +4,7 @@
   "manifest_version": 2,
   "description": "Allow web-pages to communicate with serial port.",
   "permissions": [
+    "storage"
   ],
   "background": {
     "page": "background.html",
@@ -22,5 +23,6 @@
       "matches": [ "http://*/*", "https://*/*", "file:///*" ],
       "run_at": "document_start"
     }
-  ]
+  ],
+  "options_page": "options-page.html"
 }

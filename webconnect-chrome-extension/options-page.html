@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<title>WebConnect Options</title>
+<link rel="stylesheet" href="lib/chrome-bootstrap.css">
+<script src="lib/jquery-1.8.3.min.js"></script>
+<script src="settings.js"></script>
+<script src="options-page.js"></script>
+<style>
+    .template {
+        display: none !important;
+    }
+    .whitelist-site a {
+        cursor: default;
+        color: #333;
+    }
+    .whitelist-site .delete {
+        height: 10px;
+        padding-right: 0;
+        cursor: pointer;
+    }
+    .navigation h1 {
+        margin-top: 21px;
+    }
+</style>
+<body class="frame">
+
+    <div class="navigation">
+        <h1><a href="#">WebConnect</a></h1>
+        <ul class="menu">
+            <li class="selected"><a href="#settings">Settings</a></li>
+            <li><a href="#about">About</a></li>
+        </ul>
+    </div>
+
+    <div class="mainview view">
+
+        <div id="settings" class="selected">
+            <header>
+                <h1>Settings</h1>
+            </header>
+            <div class="content">
+                <section>
+                    <h3>Serial port access</h3>
+
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="whitelist-mode" value="all">
+                            <span>Allow all sites to access serial ports <strong>(not recommended)</strong></span>
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="whitelist-mode" value="ask">
+                            <span>Ask me when a sites tries to access the serial port <strong>(recommended)</strong></span>
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="whitelist-mode" value="none">
+                            <span>Do not allow any site to to access the serial port</span>
+                        </label>
+                    </div>
+                </section>
+                <section class="allowed-sites">
+                    <h3>Allowed Sites</h3>
+                    <ul class="highlightable editable whitelist-sites">
+                        <li class="whitelist-site template">
+                            <a href="#" class="label"></a>
+                            <a href="#" class="delete">delete</a>
+                        </li>
+                    </ul>
+                    <button id="delete-all-whitelisted-sites">Delete all</button>
+                    <p class="allowed-sites-none">None</p>
+                </section>     
+            </div>
+        </div>
+
+        <div id="about">
+            <header>
+                <h1>About</h1>
+            </header>
+            <div class="content">
+                <p>WebConnect is a browser extension that allows web-apps to talk to
+                local hardware via the serial port.</p>
+
+                <p><a href="http://webconnect.io/ target="_blank">http://webconnect.io/</a>
+                by <a href="http://joewalnes.com/" target="_blank"><strong>Joe Walnes</strong></a>
+                (<a href="https://twitter.com/joewalnes" target="_blank">@joewalnes</a>).
+                <a href="https://github.com/joewalnes/webconnect" target="_blank">Fork me on GitHub.</a></p>
+
+                <p>Powered by the awesomeness of
+                <a href="http://firebreath.org/" target="_blank"><strong>FireBreath</strong></a>,
+                <a href="https://github.com/roykolak/chrome-bootstrap" target="_blank">Chrome Bootstrap</a>
+                and <a href="http://jquery.com/" target="_blank">jQuery</a>.
+
+
+            </div>
+        </div>
+
+    </div>
+</body>
+
