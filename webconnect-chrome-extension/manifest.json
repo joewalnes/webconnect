@@ -24,5 +24,8 @@
       "run_at": "document_start"
     }
   ],
-  "options_page": "options-page.html"
+  "options_page": "options-page.html",
+  "web_accessible_resources": [
+    "infobar/prompt.html"
+  ]
 }

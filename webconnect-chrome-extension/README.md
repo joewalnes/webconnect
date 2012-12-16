@@ -18,7 +18,14 @@ The pieces:
 
 *   Content-script: a lightweight snippet injected into all web-pages that allows the
     messages to be passed (via window.postMessage) back and forth between the web-page
-    and the background-page.
+    and the background-page. Also injects the 'Allow [website] to access the serial
+    port' infobar into the current page, when needed.
 
 *   API: The ../webconnect.js script that users need to include in their page that
     wraps the extension messaging protocol in the final API.
+
+*   Infobar: If extension wants to ask user for permission to access the port, it
+    injects an <iframe> into the target web-page which includes a bar asking
+    user to allow/deny.
+
+*   Options Page: Where user can change the settings.
