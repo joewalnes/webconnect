@@ -19,8 +19,8 @@
   <body>
     <header>
       <div class="inner">
-        <h1>Webconnect</h1>
-        <h2>JavaScript APIs to allow web-apps to connect to hardware devices.</h2>
+        <h1>WebConnect</h1>
+        <h2>Web, meet hardware.</h2>
         <a href="https://github.com/joewalnes/webconnect" class="button"><small>View project on</small>GitHub</a>
       </div>
     </header>
@@ -28,9 +28,270 @@
     <div id="content-wrapper">
       <div class="inner clearfix">
         <section id="main-content">
-          <p>Work in progress.</p>
 
-<p>Check the GitHub repo: <a href="https://github.com/joewalnes/webconnect/">https://github.com/joewalnes/webconnect/</a></p>
+<p style="color: #a00">This is a preview of the WebConnect 1.0 functionality. It's still being developed and there's a lot to do.<br>
+  Check the GitHub repo: <a href="https://github.com/joewalnes/webconnect/">https://github.com/joewalnes/webconnect/</a><br>
+  -Joe Walnes
+</p>
+
+<h1>What is WebConnect?</h1>
+
+<p>WebConnect is a browser extension that allows web-pages to talk to hardware connected to your serial port via a JavaScript API.</p>
+
+<h2>What kind of hardware?</h2>
+
+<p>Anything that exposes itself as a serial port:</p>
+
+<ul>
+  <li>USB microcontroller boards like <a href="http://arduino.cc/" target="_blank">Arduino</a>,
+    <a href="http://mbed.org/" target="_blank">mbed</a> or <a href="http://www.pjrc.com/teensy/" target="_blank">Teensy</a>.</li>
+  <li>Devices with UART such as <a href="http://www.raspberrypi.org/quick-start-guide" target="_blank">Raspberry Pi</a>,
+    or a <a href="http://arduino.cc/en/Main/Standalone" target="_blank">standalone ATMega</a> via an
+    <a href="https://www.adafruit.com/products/284" target="_blank">FTDI USB to UART adapter</a>.</li>
+  <li>CNC controlled machines like a <a href="http://reprap.org/wiki/Main_Page" target="_blank">RepRap 3D Printer</a>,
+    <a href="http://www.shapeoko.com/" target="_blank">Shapeoko CNC mill</a> or a
+    <a href="http://www.buildlog.net/cnc_laser/index.php" target="_blank">home made laser cutter</a>.</li>
+  <li><a href="http://oreilly.com/pub/pr/2720" target="_blank">Wireless sensor networks</a>, such as
+    <a href="http://www.adafruit.com/category/29" target="_blank">XBee mesh networking modules</a>.</li>
+</ul>
+
+<h2>What kind of things could I do from a web-page?</h2>
+
+<p>Here's some ideas:</p>
+
+<ul>
+  <li>Build a simple user interface to control your Arduino sketch.</li>
+  <li>Plot some <a href="http://smoothiecharts.org/" target="_blank">real time charts</a> of collected sensor data.</li>
+  <li>Change the color of an RGB LED via a <a href="http://raphaeljs.com/picker/" target="_blank">JavaScript color picker</a>.</li>
+  <li>Draw a sketch on screen then translate it to <a href="http://www.buildlog.net/gview/" target="_blank">GCode</a> commands
+    to send to a 3D printer.</li>
+  <li>Online tools to calibrate your CNC mill.</li>
+  <li>Visualize and configure all the nodes in a wireless mesh network. Inspect traffic flowing around network.</li>
+  <li>Develop, compile and upload microcontroller code, directly from a web-page. Actually this is a little tricky, but feasible with some work.</li>
+</ul>
+
+<h2>What browsers and operating systems does this work with?</h2>
+
+<p><a href="https://www.google.com/intl/en/chrome/browser/" target="_blank">Google Chrome</a>, on Windows, OS X and Linux.</p>
+
+<p>FireFox support is planned. Maybe more browsers in the future. Maybe.</p>
+
+<h2>Woah! I don't want random web-pages accessing my hardware</h2>
+
+<p>Don't worry, read on...</p>
+
+<h1>Security</h1>
+
+<p>If the idea of web-pages having direct access scares you, then don't worry, the WebConnect browser extension
+<strong>will never allow a web-page to access hardware without the user's approval</strong>.</p>
+
+<p>Modern web-browsers already provide JavaScript interfaces to other fancy hardware including 
+<a href="http://www.html5rocks.com/en/tutorials/getusermedia/intro/" target="_blank">webcam<a> and
+<a href="http://html5demos.com/geo">GPS</a> hardware. But only after the user has approved them.
+WebConnect is no different.</p>
+
+<p><img src="images/webconnect-allow.png" alt="Screenshot of WebConnect asking permission"></p>
+
+<h1>Get it!</h1>
+
+<p><em>Coming soon</em></p>
+
+
+<h1>JavaScript API</h1>
+
+<h2>Connecting to a SerialPort</h2>
+
+<pre>var port = new SerialPort('COM3', 9600); // (or /dev/ttyXXXX on Linux, OS X)
+
+port.onopen = function() {
+  console.log('Open!');
+};
+
+port.onclose = function() {
+  console.log('Close');
+};</pre>
+
+<h2>Listing All Available Serial Ports</h2>
+
+<pre>SerialPort.getAvailablePorts(function(ports) {
+  console.log('Ports: ', ports); // e.g. ['COM1', 'COM3'] 
+                                 // or ['/dev/ttyACM0', '/dev/ttyACM1']
+});</pre>
+
+<h2>Guessing a port</h2>
+
+<pre>var port = new SerialPort(9600); // No port named, will use the first available port it finds.</pre>
+
+<h2>Sending and receiving data</h2>
+
+<pre>var port = new SerialPort(9600);
+
+port.ondata = function(event) {
+  // This will return chunks of characters as they are made
+  // available.
+  console.log('Got data:', event.data);
+};
+
+port.onopen = function() {
+  port.send('Hello\n');
+};
+</pre>
+
+<h2>Treat a stream of data as individual messages</h2>
+
+<pre>// Working with streams of characters can be awkward
+// as you have to store them in a buffer and figure out
+// where the message boundaries are.
+// A simpler solution is to pass the message delimiter
+// to the SerialPort API and let it take care of this for
+// you. It will buffer the characters internally and
+// call ondata only when it receives a complete message.
+var port = new SerialPort(9600, {delimiter:'\n'});
+
+port.ondata = function(event) {
+  // This will only be called when a complete message terminated
+  // with a \n has been received.
+  console.log(event.data);
+  
+  port.send('OK'); // Will have \n delimiter attached.
+};</pre>
+
+<h2>Automatically encode objects to JSON, and vice-versa</h2>
+
+<pre>// Specify functions to use to encode/decode outbound/inbound messages.
+var port = new SerialPort(9600, {
+    delimiter: '\n',
+    endoder: JSON.stringify, // browser built-in
+    decoder: JSON.parse // browser built-in
+});
+
+port.onopen = function() {
+  // Send an object - the encoder will automatically convert it to a JSON string.
+  port.send({action:'setLeds', [{r:100, g:2, b:4}, {r:0, g:0, b:255}]);
+};
+
+port.ondata = function(event) {
+  // Inbound message has already been decoded from JSON into an object.
+  var msg = event.data;
+  console.log(msg.sensorName);
+  console.log(msg.sensorReadings.length);
+}</pre>
+
+<h2>Use DOM event listeners</h2>
+
+<pre>var port = new SerialPort(9600);
+
+// Same as specifiying port.onopen = function() {}, but
+// this allows for multiple event handlers to be assigned
+// to a single port.
+
+port.addEventListener('open', function() {
+  console.log('opened');
+}, false);
+
+port.addEventListener('open', function() {
+  console.log('I saw it too');
+}, false);</pre>
+
+<h2>Using jQuery</h2>
+
+<pre>var port = new SerialPort(9600);
+
+// Same as previous example, but using jQuery
+
+$(port).on('open', function() {
+  console.log('opened');
+});
+
+$(port).on('open', function() {
+  console.log('I saw it too');
+});</pre>
+
+<h2>Binary data</h2>
+
+<pre>// Specifying the binary:true option will result in the data
+// being returned as ArrayBuffers instead of strings.
+// See https://developer.mozilla.org/en-US/docs/JavaScript/Typed_arrays
+// or http://www.html5rocks.com/en/tutorials/webgl/typed_arrays/
+// for how to work with these, and process C style structs.
+var port = new SerialPort(9600, {binary:true});
+
+port.onopen = function(event) {
+  var buffer = new ArrayBuffer(16); // construct 16 byte array
+  var uint8View = new UInt8View(buffer); // manipulate it as an array of uint8_t.
+  for (var i = 0; i < uint8View.length; i++) {
+    uint8View[i] = i * 2;
+  }
+  port.send(buffer);
+};
+
+port.ondata = function(event) {
+  var buffer = event.data; // This is an ArrayBuffer
+  var values = new Uint32Array(buffer, 0, 1); // unpack 32bit uint types
+  console.log(values[0], values[1]);
+};</pre>
+
+<h2>Monitor for new hardware as it become available.</h2>
+
+<pre>// Note: These event listeners are attached to the SerialPort global
+// (not a new instance).
+SerialPort.addEventListener('available', function(event) {
+  // e.g. 'COM2' or '/dev/ttyACM0'
+  console.log('Something got plugged in: ', event.portName);
+}. false);
+
+SerialPort.addEventListener('unavailable', function(event) {
+  console.log('Awww. It got unplugged: ', event.portName);
+}, false);</pre>
+
+<h2>Detect if user has WebConnect extension installed</h2>
+
+<pre>// If extension is not installed (i.e. SerialPort not found)
+// ask user if they want to download it.
+if (!window.SerialPort) {
+  if (window.confirm('To talk to the serial port, you need to '
+        + 'install WebConnect. Download it now?') {
+    document.location = 'http://webconnect.io/webconnect-latest.crx';
+  }
+}</pre>
+
+<h1>But wait, there's more!</h1>
+
+<ul>
+  <li>SerialPort connections (including the underlying data being transferred) can be debugged
+    through <a href="https://developers.google.com/chrome-developer-tools/" target="_blank">Chrome
+    Developer Tools.</a></li>
+  <li>WebConnect shows you a visual indicator in your browser URL bar,
+    whenever a page is using a serial port.</li>
+  <li>A settings page allows you to easily tweak your security settings and
+    allowed domains.</li>
+</ul>
+
+<p>TODO: Screenshots</p>
+
+<h1>How does this voodoo work?</h1>
+
+<p>Short answer... a native C++ plugin and a Chrome extension to integrate it into the UI.</p>
+
+<p>Slightly longer winded answer...</p>
+
+<ol>
+  <li>A native C++ plugin for talking to the hardware. This is an
+    <a href="http://en.wikipedia.org/wiki/NPAPI" target="_blank">NPAPI</a> plugin module that
+    uses <a href="http://www.firebreath.org/" target="_blank">FireBreath</a> to simplify
+    the pain of coding/building for multiple operating systems and browsers. It also uses
+    <a href="http://www.boost.org/doc/libs/1_52_0/doc/html/boost_asio/overview/serial_ports.html" target="_blank">Boost.ASIO
+    Serial</a> to simplify cross-plaform access to the serial port and non-blocking IO. Although WebConnect only supports 
+    Chrome right now, this plugin will be shared across FireFox and other future browsers.</li>
+  <li>The Chrome extension that packages up the plugin, provides access control and mediates communication between
+    untrusted web-pages and the native plugin. This uses many of
+    <a href="http://developer.chrome.com/extensions/api_index.html" target="_blank">Chrome's extension APIs</a> including
+    browserAction, contentScripts, devtools, event and pageAction.</li>
+</ol>
+
+<p><a href="https://github.com/joewalnes/webconnect/blob/master/DETAILS.md" target="_blank">The even longer answer</a> (including why
+not NaCL or PPAPI).</p>
+
         </section>
 
         <aside id="sidebar">
