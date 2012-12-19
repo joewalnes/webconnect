@@ -120,7 +120,8 @@ port.onclose = function() {
 
 <h2>Guessing a port</h2>
 
-<pre>var port = new SerialPort(9600); // No port named, will use the first available port it finds.</pre>
+<pre>// No port named - will use the first available port it finds.
+var port = new SerialPort(9600);</pre>
 
 <h2>Sending and receiving data</h2>
 
@@ -146,11 +147,13 @@ port.onopen = function() {
 // to the SerialPort API and let it take care of this for
 // you. It will buffer the characters internally and
 // call ondata only when it receives a complete message.
-var port = new SerialPort(9600, {delimiter:'\n'});
+var port = new SerialPort(9600, {
+    delimiter: '\n' // How to idenfify message boundaries.
+});
 
 port.ondata = function(event) {
   // This will only be called when a complete message terminated
-  // with a \n has been received.
+  // with '\n' has been received.
   console.log(event.data);
   
   port.send('OK'); // Will have \n delimiter attached.
