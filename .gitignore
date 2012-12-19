@@ -1,2 +1,3 @@
 *.swp
 webconnect-chrome-extension/native
+.DS_Store

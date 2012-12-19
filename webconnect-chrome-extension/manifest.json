@@ -19,7 +19,10 @@
   "content_scripts": [
     {
       "all_frames": true,
-      "js": [ "content-script.js" ],
+      "js": [
+        "content-script/proxy.js",
+        "content-script/ask-permission.js"
+      ],
       "matches": [ "http://*/*", "https://*/*", "file:///*" ],
       "run_at": "document_start"
     }
