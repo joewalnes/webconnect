@@ -10,7 +10,7 @@
  * -Joe Walnes
  */
 
-var debug = true;
+var debug = false;
 
 // Communicate with the rest of the extension.
 var extensionPort = null;

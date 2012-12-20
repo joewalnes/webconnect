@@ -9,28 +9,45 @@
  *
  * This looks very similar to a Chrome info-bar to give users a warm fuzzy feeling.
  *
+ * See README in this directory to understand the flow.
+ *
  * -Joe Walnes
  */
 
-// TODO: In the future, we can use the official Chrome Infobar API.
+// In the future, we can use the official Chrome Infobar API.
 // But not now, as it's still experimental and it would prevent WebConnect from being
 // published to the Chrome Store.
 // https://developer.chrome.com/extensions/experimental.infobars.html
 
+// TODO: Ensure this only runs in top level frame.
+
 // TODO: How can this be protected from clickjacking attacks?
 
+// TODO: Handle multiple tabs on same domain requesting permission.
+
+// TODO: Animate.
+
+var shown = false,
+    spacer = null,
+    container = null;
+
 function showInfoBar() {
+    if (shown) {
+        return;
+    }
+    shown = true;
+
     // Use plain old DOM manipulations (rather than jQuery) because we want to keep this bit as
     // lightweight as possible.
 
     var containerHeight = '34px';
 
-    var spacer = document.createElement('div');
+    spacer = document.createElement('div');
     spacer.style.height = containerHeight;
     spacer.id = 'webconnect-spacer';
     document.body.insertBefore(spacer, document.body.firstChild);
 
-    var container = document.createElement('div');
+    container = document.createElement('div');
     container.id = 'webconnect-container';
     container.style.top = 0;
     container.style.left = 0;
@@ -45,7 +62,7 @@ function showInfoBar() {
 
     var iframe = document.createElement('iframe');
     iframe.id = 'webconnect-iframe';
-    iframe.src = chrome.extension.getURL('infobar/prompt.html');
+    iframe.src = chrome.extension.getURL('ask-permission/bar/bar.html');
     iframe.scrolling = 'no';
     iframe.style.width = '100%';
     iframe.style.height = containerHeight;
@@ -53,8 +70,24 @@ function showInfoBar() {
     container.appendChild(iframe);
 }
 
+function hideInfoBar() {
+    if (!shown) {
+       return;
+    }
+    shown = false;
+
+    container.parentNode.removeChild(container);
+    spacer.parentNode.removeChild(spacer);
+
+    container = null;
+    spacer = null;
+}
+
 chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
-    if (request.type == 'webconnect.requestPermission') {
+    if (request.type == 'webconnect.ask-permission.request') {
         showInfoBar();
+    }
+    if (request.type == 'webconnect.ask-permission.hide') {
+        hideInfoBar();
     }
 });

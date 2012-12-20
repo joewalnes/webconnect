@@ -4,7 +4,8 @@
   "manifest_version": 2,
   "description": "Allow web-pages to communicate with serial port.",
   "permissions": [
-    "storage"
+    "storage",
+    "tabs"
   ],
   "background": {
     "page": "background.html",
@@ -21,7 +22,7 @@
       "all_frames": true,
       "js": [
         "content-script/proxy.js",
-        "content-script/ask-permission.js"
+        "ask-permission/ask-permission-content-script.js"
       ],
       "matches": [ "http://*/*", "https://*/*", "file:///*" ],
       "run_at": "document_start"
@@ -29,6 +30,6 @@
   ],
   "options_page": "options-page.html",
   "web_accessible_resources": [
-    "infobar/prompt.html"
+    "ask-permission/bar/bar.html"
   ]
 }

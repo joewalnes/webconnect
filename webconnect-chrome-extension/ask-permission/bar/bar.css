@@ -2,9 +2,7 @@
  * Style page to look like a Chrome info-bar (sorta).
  *
  * Hat-tip to https://github.com/roykolak/chrome-bootstrap
- * for some of the styling.
- *
- * -Joe Walnes
+ * for most of the styling.
  */
 body {
     font-family: 'Chrome Droid Sans', 'Droid Sans Fallback', 'Lucida Grande', sans-serif;
@@ -44,6 +42,24 @@ button {
     margin-left: 3px;
     margin-right: 3px;
 }
+button:focus {
+    -webkit-transition: border-color 200ms;
+    /* We use border color because it follows the border radius (unlike outline).
+     * This is particularly noticeable on mac. */
+    border-color: #4d90fe;
+    outline: none;
+}
+button:hover {
+    background-image: -webkit-linear-gradient(#f0f0f0, #f0f0f0 38%, #e0e0e0);
+    border-color: rgba(0, 0, 0, 0.3);
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.12), inset 0 1px 2px rgba(255, 255, 255, 0.95);
+    color: black;
+}
+button:active:enabled {
+    background-image: -webkit-linear-gradient(#e7e7e7, #e7e7e7 38%, #d7d7d7);
+    box-shadow: none;
+    text-shadow: none;
+}
 .icon {
     position: relative;
     top: 4px;
@@ -58,7 +74,7 @@ button {
     line-height: 34px;
     padding: 0 10px;
 }
-.site {
+#pattern {
     font-weight: bold;
 }
 .actions {
@@ -68,7 +84,7 @@ button {
     bottom: 0;
     line-height: 34px;
 }
-.close {
+#close {
     background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAQAAAC1+jfqAAAAiElEQVR42r2RsQrDMAxEBRdl8SDcX8lQPGg1GBI6lvz/h7QyRRXV0qUULwfvwZ1tenw5PxToRPWMC52eA9+WDnlh3HFQ/xBQl86NFYJqeGflkiogrOvVlIFhqURFVho3x1moGAa3deMs+LS30CAhBN5nNxeT5hbJ1zwmji2k+aF6NENIPf/hs54f0sZFUVAMigAAAABJRU5ErkJggg==");
     background-repeat: no-repeat;
     display: inline-block;
@@ -78,7 +94,7 @@ button {
     position: relative;
     top: 2px;
 }
-.close:hover {
+#close:hover {
     background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAQAAAC1+jfqAAAAqklEQVR4XqWRMQ6DMAxF/1Fyilyj2SmIBUG5QcTCyJA5Z8jGhlBPgRi4TmoDraVmKFJlWYrlp/g5QfwRlwEVNWVa4WzfH9jK6kCkEkBjwxOhLghheMWMELUAqqwQ4OCbnE4LJnhr5IYdqQt4DJQjhe9u4vBBmnxHHNzRFkDGjHDo0VuTAqy2vAG4NkvXXDHxbGsIGlj3e835VFNtdugma/Jk0eXq0lP//5svi4PtO01oFfYAAAAASUVORK5CYII=");
 }
 

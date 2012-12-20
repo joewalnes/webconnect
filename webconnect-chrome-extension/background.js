@@ -71,7 +71,7 @@ chrome.extension.onConnect.addListener(function(port) {
                 case PermissionResult.ASK:
                     console.debug('webconnect: PermissionRequest. site:', site, 'pattern:', pattern);
                     chrome.tabs.sendMessage(port.sender.tab.id,
-                        {type:'webconnect.requestPermission', site:site, pattern:pattern},
+                        {type:'webconnect.ask-permission.request', site:site, pattern:pattern},
                         function(response) {
                             if (response.authorized) {
                                 console.debug('webconnect: PermissionResponse=ALLOWED. site:', site, 'pattern:', pattern);
