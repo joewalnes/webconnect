@@ -19,8 +19,6 @@
 // published to the Chrome Store.
 // https://developer.chrome.com/extensions/experimental.infobars.html
 
-// TODO: Ensure this only runs in top level frame.
-
 // TODO: How can this be protected from clickjacking attacks?
 
 // TODO: Handle multiple tabs on same domain requesting permission.

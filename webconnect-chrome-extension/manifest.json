@@ -19,7 +19,7 @@
   ],
   "content_scripts": [
     {
-      "all_frames": true,
+      "all_frames": false,
       "js": [
         "proxy/proxy-content-script.js",
         "ask-permission/ask-permission-content-script.js"
