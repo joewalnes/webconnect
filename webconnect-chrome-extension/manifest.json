@@ -21,14 +21,14 @@
     {
       "all_frames": true,
       "js": [
-        "content-script/proxy.js",
+        "proxy/proxy-content-script.js",
         "ask-permission/ask-permission-content-script.js"
       ],
       "matches": [ "http://*/*", "https://*/*", "file:///*" ],
       "run_at": "document_start"
     }
   ],
-  "options_page": "options-page.html",
+  "options_page": "options-page/options-page.html",
   "web_accessible_resources": [
     "ask-permission/bar/bar.html"
   ]
