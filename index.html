@@ -63,7 +63,7 @@
   <li>Build a simple user interface to control your Arduino sketch.</li>
   <li>Plot some <a href="http://smoothiecharts.org/" target="_blank">real time charts</a> of collected sensor data.</li>
   <li>Change the color of an RGB LED via a <a href="http://raphaeljs.com/picker/" target="_blank">JavaScript color picker</a>.</li>
-  <li>Draw a sketch on screen then translate it to <a href="http://www.buildlog.net/gview/" target="_blank">GCode</a> commands
+  <li>Draw a sketch on screen then translate it to <a href="http://gcode.joewalnes.com/" target="_blank">GCode</a> commands
     to send to a 3D printer.</li>
   <li>Online tools to calibrate your CNC mill.</li>
   <li>Visualize and configure all the nodes in a wireless mesh network. Inspect traffic flowing around network.</li>
@@ -274,26 +274,14 @@ if (!window.SerialPort) {
 
 <h1>How does this voodoo work?</h1>
 
-<p>Short answer... a native C++ plugin and a Chrome extension to integrate it into the UI.</p>
+<p style="color: #a00">Update: NPAPI is dead. New approach.</p>
 
-<p>Slightly longer winded answer...</p>
-
-<ol>
-  <li>A native C++ plugin for talking to the hardware. This is an
-    <a href="http://en.wikipedia.org/wiki/NPAPI" target="_blank">NPAPI</a> plugin module that
-    uses <a href="http://www.firebreath.org/" target="_blank">FireBreath</a> to simplify
-    the pain of coding/building for multiple operating systems and browsers. It also uses
-    <a href="http://www.boost.org/doc/libs/1_52_0/doc/html/boost_asio/overview/serial_ports.html" target="_blank">Boost.ASIO
-    Serial</a> to simplify cross-plaform access to the serial port and non-blocking IO. Although WebConnect only supports 
-    Chrome right now, this plugin will be shared across FireFox and other future browsers.</li>
-  <li>The Chrome extension that packages up the plugin, provides access control and mediates communication between
-    untrusted web-pages and the native plugin. This uses many of
-    <a href="http://developer.chrome.com/extensions/api_index.html" target="_blank">Chrome's extension APIs</a> including
-    browserAction, contentScripts, devtools, event and pageAction.</li>
-</ol>
-
-<p><a href="https://github.com/joewalnes/webconnect/blob/master/DETAILS.md" target="_blank">The even longer answer</a> (including why
-not NaCL or PPAPI).</p>
+<p>A browser extension allows communication to standard web-pages, but only after the user has
+  explicitly authorized a website to access the serial port. The extension provides access control, messaging
+  and a browser UI. Deep inside the extension Chrome will use the
+  <a href="https://developer.chrome.com/apps/usb" target="_blank">USB API</a> and FireFox
+  will use <a href="https://developer.mozilla.org/en-US/docs/Mozilla/js-ctypes" target="_blank">js ctypes</a>.
+</p>
 
         </section>
 
